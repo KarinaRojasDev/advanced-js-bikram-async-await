@@ -110,20 +110,16 @@ que pinte la batalla entre "Pug" y "Pikachu" (no se testea) */
 
 async function printPugVsPikachu() {
   try {
-    const pikachu = `https://pokeapi.co/api/v2/pokemon/pikachu`;
-    const pug = `https://dog.ceo/api/breed/pug/images/random`;
+    let dog_url_image = await getRandomDogImage();
+    let pokemon_url_image = await getRandomPokemonImage();
 
-    const [res1, res2] = await Promise.all([fetch(pikachu), fetch(pug)]);
-    const data1 = await res1.json();
-    const data2 = await res2.json();
-
-    document.body.innerHTML += `<section>
-                    <img src="${data1.sprites.front_default}" alt="imagen de ${data1.forms[0].name}">
-                    <p>${data1.base_experience}</p>
-                    <p>${data1.forms[0].name}</p>
+    document.body.innerHTML += 
+                `<section>
+                    <img src="${pokemon_url_image}" alt="imagen de Pikachu">
+                    <p>Pikachu </p>
                 </section>
                 <section>
-                    <img src="${data2.message}" alt="imagen de Pug">
+                    <img src="${dog_url_image}" alt="imagen de Pug">
                     <p>Pug</p>
                 </section>`;
   } catch (error) {
@@ -131,7 +127,7 @@ async function printPugVsPikachu() {
   }
 }
 
-printPugVsPikachu().then((data) => console.log(data));
+printPugVsPikachu(); 
 
 /* Ejercicio 7.- Declara una función **getRandomCharacter** que retorne un personaje aleatorio. */
 
